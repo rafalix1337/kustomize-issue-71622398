@@ -1,0 +1,11 @@
+resources:
+- backend_app1
+- backend_app2
+
+configMapGenerator:
+  - name: backend-properties
+    envs:
+      - backend.properties
+
+commonLabels:
+  type: "backend"

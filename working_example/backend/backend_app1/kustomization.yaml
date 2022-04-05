@@ -1,0 +1,8 @@
+resources:
+- deployment.yaml
+- service.yaml
+
+configMapGenerator:
+  - name: backend_app1-properties
+    envs:
+      - backend_app1.properties

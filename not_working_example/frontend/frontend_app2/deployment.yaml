@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: frontend-app-2
+  name: frontend-app-2
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: frontend-app-2
+  template:
+    metadata:
+      labels:
+        app: frontend-app-2
+    spec:
+      containers:
+      - name: frontend-app-2
+        image: nginx:1.21.6-alpine
+        env:
+          - name: placeholder
+            value: placeholder
+      restartPolicy: Always

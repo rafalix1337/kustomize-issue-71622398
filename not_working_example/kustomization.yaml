@@ -1,0 +1,45 @@
+resources:
+- backend
+- frontend
+
+configMapGenerator:
+- name: common-properties
+  envs:
+  - common.properties
+
+patches:
+  - patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/envFrom
+        value:
+        - configMapRef:
+            name: common-properties
+    target:
+      kind: Deployment
+  - patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/envFrom/-
+        value:
+          configMapRef:
+           name: frontend-properties
+    target:
+      kind: Deployment
+      labelSelector: "type=frontend"
+  - patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/envFrom/-
+        value:
+          configMapRef:
+           name: backend-properties
+    target:
+      kind: Deployment
+      labelSelector: "type=backend"
+  - patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/envFrom/-
+        value:
+          configMapRef:
+           name: backend_app1-properties
+    target:
+      kind: Deployment
+      labelSelector: "app=backend-app-1"

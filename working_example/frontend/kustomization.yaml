@@ -1,0 +1,11 @@
+resources:
+- frontend_app1
+- frontend_app2
+
+configMapGenerator:
+  - name: frontend-properties
+    envs:
+      - frontend.properties
+
+commonLabels:
+  type: "frontend"

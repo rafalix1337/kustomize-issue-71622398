@@ -1,0 +1,18 @@
+resources:
+- frontend_app1
+- frontend_app2
+
+configMapGenerator:
+  - name: frontend-properties
+    envs:
+      - frontend.properties
+
+patches:
+  - patch: |-
+      - op: add
+        path: /spec/template/spec/containers/0/envFrom/-
+        value:
+        - configMapRef:
+            name: frontend-properties
+    target:
+      kind: Deployment
