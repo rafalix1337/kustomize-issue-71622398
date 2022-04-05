@@ -1,0 +1,1 @@
+# kustomize-issue-71622398
